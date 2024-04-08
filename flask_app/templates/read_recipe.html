@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="bg-dark p-3 d-flex justify-content-between" style="height: 70px;">
+    <h2 class="text-light">Add new recipe</h2>
+    <div>
+        <a class="btn btn-success" href="/dashboard">dashboard</a>
+        <a class="btn btn-success" href="/logout">Logout </a>
+    </div>
+</div>
+<main class="mx-auto my-4 p-3" style="width: 900px;">
+    <h2>{{recipe.name}}</h2>
+    <div class="border border-dark">
+        <h4>Description:</h4>
+        <p>{{recipe.description}}</p>
+        <h4>Under 30 minutes:</h4>
+        <p>{% if recipe.under_30_minutes==1%}Yes{%else%} No {% endif %}</p>
+        <h4>Instructions:</h4>
+        <p>{{recipe.instruction}}</p>
+        <h4>Date made:</h4>
+        <p>{{recipe.created_at}}</p>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="bg-dark p-3 d-flex justify-content-between" style="height: 70px;">
+    <h2 class="text-light">Add new recipe</h2>
+    <div>
+        <a class="btn btn-success" href="/dashboard">dashboard</a>
+        <a class="btn btn-success" href="/logout">Logout </a>
+    </div>
+</div>
+<main class="mx-auto my-4 p-3" style="width: 900px;">
+    {% with messages = get_flashed_messages(category_filter = ["create"]) %}
+    {% if messages %}
+        {% for message in messages %}
+        <p class="form-text bg-danger text-dark fs-6" >{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form  action="/recipes/new" method="POST">
+        <div class="d-flex justify-content-between">
+            <div class="col-5">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="description" rows="2" name="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instruction" class="form-label">Instructions</label>
+                    <textarea class="form-control" id="instruction" rows="3" name="instruction"></textarea>
+                </div>
+            </div>
+            <div class="col-5">
+                <div>
+                    <label class="d-block" for="start">Date made on:</label>
+                    <input type="date" id="start" name="date" >
+                </div>
+                <div>
+                    <p>Under 30 minutes</p>
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <input type="radio" id="yes" name="minutes" value="1" checked>
+                            <label for="yes">Yes</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="no" name="minutes" value="0">
+                            <label for="no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" value="submit">create</button>
+    </form>
+</main>
+
+{% endblock %}

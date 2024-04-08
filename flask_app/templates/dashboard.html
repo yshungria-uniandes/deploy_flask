@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="bg-dark p-3 d-flex justify-content-between" style="height: 70px;">
+    <h2 class="text-light">Bienvenido {{user.first_name}}</h2>
+    <div>
+        <a class="btn btn-success" href="/recipes/new">create </a>
+        <a class="btn btn-success" href="/logout">Logout </a>
+    </div>
+</div>
+<main>
+    <h3>There are the recipes</h3>
+    <table class="table border border-dark mx-auto" style="width: 800px;">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Under 30 minutes</th>
+                <th scope="col">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for recipe in recipes %}
+            {% if recipe.id == None %}
+            <div class="text-danger text-center">No Tiene productos</div>
+            {% else %}
+            <tr>
+                <th scope="row">{{recipe.name}}</th>
+                <td>{% if recipe.under_30_minutes==1%}Yes{%else%} No {% endif %}</td>            
+                <td class="d-flex justify-content-between">
+                    {% if recipe.user_id != session['id'] %}
+                    <a class="btn btn-primary" href="/recipes/{{recipe.id}}">View instructions</a>
+                    {% else %}
+                    <a class="btn btn-primary" href="/recipes/{{recipe.id}}">View instructions</a>
+                    <a class="btn btn-success" href="/recipes/edit/{{recipe.id}}">Edit</a>
+                    <a class="btn btn-danger" href="/recipes/delete/{{recipe.id}}">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+{% endblock %}
